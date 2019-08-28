@@ -19,7 +19,7 @@ Users management
   - user can't access the login form
   - user see his profile
   - user see other user's profiles
-  - user can update his own profile information 
+  - user can update his own profile information
   - user can delete his own account [TODO]
 - As unautenticated user
   - guest can only access login and signup paths
@@ -35,5 +35,4 @@ Posts management
 - As Unauthenticated user
   - Guests can't create new posts
   - Guests can't update any posts
-  - Guests can't delete any posts
   - Guest can't check the index of posts
