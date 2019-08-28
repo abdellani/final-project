@@ -57,5 +57,25 @@ feature "Posts" do
     end
   end
   describe "As Unauthenticated user " do
+    scenario "Guests can't create new posts" do
+      visit new_post_path
+      expect(page).to have_current_path(new_user_session_path)
+      expect(page).to have_content("You need to sign in or sign up before continuing.")
+    end
+
+    scenario "Guests can't update any posts" do
+      user = User.create(name:'testing', email:'testing@test.com', password:'123456')
+      post = user.posts.build(content: 'post content')
+      post.save
+      visit edit_post_path(post)
+      expect(page).to have_current_path(new_user_session_path)
+      expect(page).to have_content("You need to sign in or sign up before continuing.")
+    end
+
+    scenario "Guests can't update any posts" do
+      visit posts_path
+      expect(page).to have_current_path(new_user_session_path)
+      expect(page).to have_content("You need to sign in or sign up before continuing.")
+    end
   end
 end
