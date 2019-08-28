@@ -5,5 +5,10 @@
   <li>Content : <%= p.content %></li>
   <li>Author : <%= p.author.name %></li>
   <li>Date : <%= p.created_at.strftime('%m/%d/%Y') %></li>
+  <li> <%= link_to "Show", post_path(p) %> </li>
+  <% if current_user == p.author %> 
+  <li> <%= link_to "Edit", edit_post_path(p) %> </li>
+  <li> <%= link_to "Delete", post_path(p), method: :delete %> </li>
+  <%end%>
 </ul>
 <% end %>

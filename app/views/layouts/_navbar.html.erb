@@ -1,4 +1,5 @@
 <% if user_signed_in? %>
+<%= image_tag current_user.image_link %>
 Welcome: <%= current_user.name.capitalize%>
 <%= link_to 'Home', root_path%>
 <%= link_to 'Create new post', new_post_path%>
