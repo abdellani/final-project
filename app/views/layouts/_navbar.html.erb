@@ -2,6 +2,9 @@
 <%= image_tag current_user.image_link %>
 Welcome: <%= current_user.name.capitalize%>
 <%= link_to 'Home', root_path%>
+<%= link_to 'All users', users_path%>
 <%= link_to 'Create new post', new_post_path%>
+<%= link_to 'Edit account', edit_user_registration_path%>
+<%= link_to 'Profile', users_path(current_user)%>
 <%= link_to 'Logout', destroy_user_session_path, method: :delete%>
 <% end %>
