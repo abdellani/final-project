@@ -96,4 +96,20 @@ feature "Users managment" do
 
     end
   end
+  describe "Unauthenticated user" do 
+    it "should have access to the login page " do
+      visit root_path
+      expect(page).to have_current_path(new_user_session_path)
+      visit posts_path
+      expect(page).to have_current_path(new_user_session_path)
+      visit new_post_path
+      expect(page).to have_current_path(new_user_session_path)
+      visit users_path
+      expect(page).to have_current_path(new_user_session_path)
+    end
+    it "should have access to the sign up page " do
+      visit new_user_registration_path
+      expect(page).to have_current_path(new_user_registration_path)
+    end
+  end
 end

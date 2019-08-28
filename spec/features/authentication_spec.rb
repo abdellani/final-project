@@ -37,7 +37,6 @@ feature "Authentication" do
       expect(page).to have_content("Logout")
       click_on "Logout"
       expect(page).to have_current_path(new_user_session_path)
-
     end
-end
+  end
 end

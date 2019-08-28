@@ -2,4 +2,6 @@
   <li>Content : <%= @post.content %></li>
   <li>Author : <%= @post.author.name %></li>
   <li>Date : <%= @post.created_at.strftime('%m/%d/%Y') %></li>
+  <li> <%= link_to "Edit", edit_post_path(@post) %> </li>
+  <li> <%= link_to "Delete", post_path(@post), method: :delete %> </li>
 </ul>
