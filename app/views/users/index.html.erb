@@ -1,6 +1,6 @@
 <% @users.each do |u|%>
 <ul>
-  <%= image_tag current_user.image_link %>
+  <%= image_tag u.image_link %>
   <li><%=u.name%></li>
   <li>Number of Posts : <%= u.posts.count %></li>
   <%= link_to 'See profile', user_path(u)%>

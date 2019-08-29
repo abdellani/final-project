@@ -9,9 +9,10 @@
   <% else %>
     <li> <%= link_to "Like", likes_path(post_id: @post.id), method: :post %> </li>
   <% end %>
-
-  <li> <%= link_to "Edit", edit_post_path(@post) %> </li>
-  <li> <%= link_to "Delete", post_path(@post), method: :delete %> </li>
+  <% if current_user == @post.author %>
+    <li> <%= link_to "Edit", edit_post_path(@post) %> </li>
+    <li> <%= link_to "Delete", post_path(@post), method: :delete %> </li>
+  <% end %>
 </ul>
 <h1>Comments :</h1>
 <% @post.comments.each do |comment|%>

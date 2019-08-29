@@ -37,7 +37,7 @@ Posts management
   - Guests can't update any posts
   - Guest can't check the index of posts
 
-Comments
+Comments management
 - Authenticated User
   - User can comment posts
   - User can remove his comments
@@ -45,7 +45,7 @@ Comments
   - User can't edit other user's comments
   - User can't remove other user's comments
 
-Like
+Likes management
 - Au authenticated User
   - User can like his posts
   - User can like other's posts
