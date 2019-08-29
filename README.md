@@ -36,3 +36,18 @@ Posts management
   - Guests can't create new posts
   - Guests can't update any posts
   - Guest can't check the index of posts
+
+Comments
+- Authenticated User
+  - User can comment posts
+  - User can remove his comments
+  - User can update his comments
+  - User can't edit other user's comments
+  - User can't remove other user's comments
+
+Like
+- Au authenticated User
+  - User can like his posts
+  - User can like other's posts
+  - User can't like a post more than two times
+  - User can revoke a like from a post that his liked
