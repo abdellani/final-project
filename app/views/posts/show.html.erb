@@ -5,3 +5,14 @@
   <li> <%= link_to "Edit", edit_post_path(@post) %> </li>
   <li> <%= link_to "Delete", post_path(@post), method: :delete %> </li>
 </ul>
+<h1>Comments :</h1>
+  <% @post.comments.each do |comment|%>
+    <ul>
+      <li><%= comment.content%></li>
+      <li><%= comment.user.name%></li>
+      <li><%= comment.created_at.strftime('%m/%d/%Y') %></li>
+      <li><%= link_to "Delete", comment_path(comment), method: :delete %></li>
+    </ul>
+  <% end %>
+
+<%= render "posts/comment_form" %>
