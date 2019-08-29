@@ -1,0 +1,19 @@
+<ul>
+  <%= image_tag current_user.image_link %>
+  <li>Name: <%=@user.name%></li>
+  <li>Email: <%=@user.email%></li>
+  <li><%= link_to "Edit Profile", edit_user_registration_path %> </li>
+  </li>
+</ul>
+
+<h4>Posts:</h4>
+<% @user.posts.each do |p| %>
+<ul>
+  <li>Content : <%= p.content %></li>
+  <li>Date : <%= p.created_at.strftime('%m/%d/%Y') %></li>
+  <% if current_user == p.author %>
+  <li> <%= link_to "Edit", edit_post_path(p) %> </li>
+  <li> <%= link_to "Delete", post_path(p), method: :delete %> </li>
+  <%end%>
+</ul>
+<% end %>
