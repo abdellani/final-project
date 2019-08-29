@@ -7,7 +7,11 @@
   <li>Date : <%= p.created_at.strftime('%m/%d/%Y') %></li>
   <li>Likes : <%= p.likes.count %></li>
   <li> <%= link_to "Show", post_path(p) %> </li>
-  <li> <%= link_to "Like", likes_path(post_id: p.id), method: :post %> </li>
+  <% if p.likes.any? {|like| like.user == current_user}%>
+    <li> <%= link_to "Unlike", like_path(post_id: p.id), method: :delete %> </li>
+  <% else %>
+    <li> <%= link_to "Like", likes_path(post_id: p.id), method: :post %> </li>
+  <% end %>
   <% if current_user == p.author %>
   <li> <%= link_to "Edit", edit_post_path(p) %> </li>
   <li> <%= link_to "Delete", post_path(p), method: :delete %> </li>
