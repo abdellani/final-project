@@ -58,8 +58,8 @@ Friends management
 
 - Authenticated User
   - User can add friend
-  - User can unfriend user
-  - User can accept frendship request
+  - User can unfriend a friend
+  - User can accept friendship request
   - User can decline friendship request
   - User gets notifiation about friendship requrest
   - User can see if request is pending
