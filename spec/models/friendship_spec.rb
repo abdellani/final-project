@@ -1,20 +1,22 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Friendship, type: :model do
   before :each do
-    @user1 = User.create(name:'test1', email:'testgen@test.com', password:'123456')
-    @user2 = User.create(name:'test1', email:'testgn@test.com', password:'123456')
+    @user1 = User.create(name: 'test1', email: 'testgen@test.com', password: '123456')
+    @user2 = User.create(name: 'test1', email: 'testgn@test.com', password: '123456')
   end
 
   describe '#sender' do
     it 'has to have sender' do
-      request = @user2.friendship_received.build()
+      request = @user2.friendship_received.build
       request.valid?
-      expect(request.errors[:sender]).to include("must exist")
+      expect(request.errors[:sender]).to include('must exist')
 
       request = @user2.friendship_received.build(sender: @user1)
       expect(request.valid?).to eql(true)
-      expect(request.errors[:sender]).to_not include("must exist")
+      expect(request.errors[:sender]).to_not include('must exist')
     end
 
     it 'creates friendship request' do
@@ -26,13 +28,13 @@ RSpec.describe Friendship, type: :model do
   end
   describe '#receiver' do
     it 'has to have reciver' do
-      request = @user1.friendship_sent.build()
+      request = @user1.friendship_sent.build
       request.valid?
-      expect(request.errors[:receiver]).to include("must exist")
+      expect(request.errors[:receiver]).to include('must exist')
 
       request = @user1.friendship_sent.build(receiver: @user2)
       expect(request.valid?).to eql(true)
-      expect(request.errors[:receiver]).to_not include("must exist")
+      expect(request.errors[:receiver]).to_not include('must exist')
     end
 
     it 'creates friendship request' do
@@ -46,8 +48,8 @@ RSpec.describe Friendship, type: :model do
 
   describe '#friendship_sent and friendship_recieved' do
     before :each do
-      @user3 = User.create(name:'test4', email:'test4@test.com', password:'123456')
-      @user4 = User.create(name:'test5', email:'test5@test.com', password:'123456')
+      @user3 = User.create(name: 'test4', email: 'test4@test.com', password: '123456')
+      @user4 = User.create(name: 'test5', email: 'test5@test.com', password: '123456')
       @user1.friendship_sent.create(receiver: @user2, status: true)
       @user1.friendship_sent.create(receiver: @user3)
       @user1.friendship_sent.create(receiver: @user4)
@@ -70,7 +72,7 @@ RSpec.describe Friendship, type: :model do
 
     it 'returns all pending friendships' do
       requests = @user1.pending_friends
-      expect(requests).to include(@user3,@user4)
+      expect(requests).to include(@user3, @user4)
     end
 
     it 'it returns friendship status between two users' do

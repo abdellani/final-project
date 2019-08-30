@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class LikesController < ApplicationController
   before_action :authenticate_user!
   def create
@@ -12,7 +14,7 @@ class LikesController < ApplicationController
   end
 
   def destroy
-    current_user.likes.each {|like| like.destroy  if like.post_id == params[:post_id].to_i}
+    current_user.likes.each { |like| like.destroy if like.post_id == params[:post_id].to_i }
     redirect_back(fallback_location: root_path)
   end
 end
