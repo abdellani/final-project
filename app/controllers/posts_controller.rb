@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 class PostsController < ApplicationController
   before_action :authenticate_user!
-  before_action :get_post, only: [:show,:edit,:destroy,:update]
-  before_action only: [:update,:edit,:destroy] do 
-    is_owner?(@post.author)
+  before_action :check_post, only: %i[show edit destroy update]
+  before_action only: %i[update edit destroy] do
+    owner?(@post.author)
   end
 
   def index
@@ -13,7 +15,7 @@ class PostsController < ApplicationController
     @post = Post.new
   end
 
-  def create 
+  def create
     user = current_user
     @post = user.posts.build(post_params)
     if @post.save
@@ -22,11 +24,13 @@ class PostsController < ApplicationController
       render :new
     end
   end
+
   def show
-    @new_comment= Comment.new
+    @new_comment = Comment.new
   end
-  def edit
-  end
+
+  def edit; end
+
   def update
     if @post.update_attributes(post_params)
       redirect_to post_path(@post)
@@ -34,15 +38,19 @@ class PostsController < ApplicationController
       render :edit
     end
   end
-  def destroy 
+
+  def destroy
     @post.destroy
     redirect_to root_path
   end
+
   private
+
   def post_params
     params.require(:post).permit(:content)
   end
-  def get_post
+
+  def check_post
     @post = Post.find(params[:id])
   end
 end
