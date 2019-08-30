@@ -1,4 +1,32 @@
-## Integration Tests
+# About the program 
+
+This project is a facebook-like web application, where a user can share content, build relationships with other users, and express his points of view.
+
+# Installation 
+
+This project is based on ruby on rails framework. RSpec and Cabypara have been used to implement the different unit and integration tests. To install this project, you'll need to have a running Postgres server in you local computer or network. After cloning the project, you have to run `bundle install` followed by `rails db:migrate`
+
+# Configuration
+
+You'll need to configure the application to connect to the database. The configuration file can be found at ` config/database.yml`, you'll need to fill the different field with data from your environment. 
+```yml
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: [DATABASE_NAME]
+  username: [USERNAME]
+  password: [PASSWORD]
+  host: [IP]
+```
+# Run the code 
+To run the application in you development environment, you need to run `rails s`.
+To deploy it in heroku, you need first to run `git push heroku master` followed by `heroku run rails db:migrate`
+# Get Update
+To get the latest updates, you run `git pull origin master`
+# Authors
+- Emir Vatric -- [User Github link](https://github.com/EmirVatric)
+- Mohamed Abdellani -- [User Github link](https://github.com/abdellani)
+# Run Tests
 
 Authentication
 

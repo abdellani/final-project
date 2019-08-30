@@ -6,11 +6,8 @@ class LikesController < ApplicationController
     @like = Like.new
     @like.user = current_user
     @like.post = Post.find(params[:post_id])
-    if @like.save
-      redirect_back(fallback_location: root_path)
-    else
-      redirect_back(fallback_location: root_path)
-    end
+    @like.save
+    redirect_back(fallback_location: root_path)
   end
 
   def destroy
