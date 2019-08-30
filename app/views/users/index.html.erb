@@ -4,5 +4,14 @@
   <li><%=u.name%></li>
   <li>Number of Posts : <%= u.posts.count %></li>
   <%= link_to 'See profile', user_path(u)%>
+  <%if current_user != u%>
+    <% if u.find_friends.any?{ |f| f==current_user} %>
+      <li><%= link_to "Remove", friendship_path(id:u.id), method: :delete %></li>
+    <% elsif u.pending_friends.any?{ |f| f==current_user} %>
+      <li><a>request pending</a></li>
+    <% else %>
+      <%= link_to 'Add as friend', friendships_path(user_id:u.id), method: :post%>
+    <%end%>
+  <%end%>
 </ul>
 <% end %>
