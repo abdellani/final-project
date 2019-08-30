@@ -21,6 +21,7 @@ class User < ApplicationRecord
   def find_friendships friend_id
     Friendship.find_by_sql(["SELECT * FROM friendships WHERE  ((user1_id= ? and user2_id = ?) or (user1_id= ? and user2_id = ?)) AND status = true ",self.id,friend_id,friend_id,self.id]) 
   end
+
   def find_friendships_pending friend_id
     Friendship.find_by_sql(["SELECT * FROM friendships WHERE  ((user1_id= ? and user2_id = ?) or (user1_id= ? and user2_id = ?)) AND status = false ",self.id,friend_id,friend_id,self.id]) 
   end
@@ -28,6 +29,7 @@ class User < ApplicationRecord
   def find_friends
     User.find_by_sql(["SELECT * FROM users WHERE id IN (SELECT CASE WHEN user1_id=? THEN user2_id ELSE user1_id END FROM friendships WHERE (user1_id= ? OR user2_id = ?) AND status = true )",self.id,self.id,self.id]) 
   end
+  
   def pending_friends
     User.find_by_sql(["SELECT * FROM users WHERE id IN (SELECT CASE WHEN user1_id=? THEN user2_id ELSE user1_id END FROM friendships WHERE (user1_id= ? OR user2_id = ?) AND status = false )",self.id,self.id,self.id]) 
   end

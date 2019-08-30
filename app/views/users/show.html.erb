@@ -3,7 +3,19 @@
   <li>Name: <%=@user.name%></li>
   <li>Email: <%=@user.email%></li>
   <% if current_user == @user%>
-    <li><%= link_to "Edit Profile", edit_user_registration_path %> </li>
+  <li><%= link_to "Edit Profile", edit_user_registration_path %> </li>
+  <%end%>
+  <%if current_user != @user%>
+  <h3>Friendship Status:</h3>
+  <% if @user.find_friends.any?{ |f| f==current_user} %>
+  <li><%= link_to "Remove", friendship_path(id:@user.id), method: :delete %></li>
+  <% elsif @user.pending_friends.any?{ |f| f==current_user} %>
+  <%= accept_reject_pending(@user.id) %>
+
+
+  <% else %>
+  <%= link_to 'Add as friend', friendships_path(user_id:@user.id), method: :post%>
+  <%end%>
   <%end%>
 </ul>
 
