@@ -4,7 +4,8 @@ require 'rails_helper'
 
 RSpec.describe Like, type: :model do
   before :each do
-    @user = User.create(name: 'test', email: 'test@test.com', password: '123456')
+    @user = User.create(name: 'test', email: 'test@test.com',
+                        password: '123456')
     @post = @user.posts.create(content: 'test post')
   end
 

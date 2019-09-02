@@ -6,5 +6,8 @@ Welcome: <%= current_user.name.capitalize%>
 <%= link_to 'Create new post', new_post_path%>
 <%= link_to 'Edit account', edit_user_registration_path%>
 <%= link_to 'Profile', user_path(current_user)%>
+<%= link_to 'Friends', users_path(filter: 'friends')%>
+<%= link_to 'Notifications', users_path(filter: 'pending')%>
+
 <%= link_to 'Logout', destroy_user_session_path, method: :delete%>
 <% end %>

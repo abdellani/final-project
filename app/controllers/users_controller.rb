@@ -7,6 +7,14 @@ class UsersController < ApplicationController
   end
 
   def index
-    @users = User.all
+    filter = params[:filter]
+    if filter == 'friends'
+      @users = current_user.find_friends
+    elsif filter == 'pending'
+      @users = current_user.friendship_received.map { |u| u.sender if u.receiver == current_user && u.status == false }
+      @users.compact!
+    else
+      @users = User.all
+    end
   end
 end

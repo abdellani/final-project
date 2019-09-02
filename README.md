@@ -66,6 +66,7 @@ Posts management
   - Guest can't check the index of posts
 
 Comments management
+
 - Authenticated User
   - User can comment posts
   - User can remove his comments
@@ -74,8 +75,20 @@ Comments management
   - User can't remove other user's comments
 
 Likes management
-- Au authenticated User
+
+- Authenticated User
   - User can like his posts
   - User can like other's posts
   - User can't like a post more than two times
   - User can revoke a like from a post that his liked
+
+Friends management
+
+- Authenticated User
+  - User can add friend
+  - User can unfriend a friend
+  - User can accept friendship request
+  - User can decline friendship request
+  - User gets notifiation about friendship requrest
+  - User can see if request is pending
+  - User can see a list of friends

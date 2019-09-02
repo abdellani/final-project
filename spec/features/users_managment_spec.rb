@@ -79,7 +79,8 @@ feature 'Users managment' do
       expect(page).to have_content("Name: #{@user.name}")
     end
     scenario 'user can see his profile' do
-      second = User.create(name: 'other user', email: 'other@test.com', password: '123456')
+      second = User.create(name: 'other user', email: 'other@test.com',
+                           password: '123456')
       visit user_path(second)
       expect(page).to have_current_path(user_path(second))
       expect(page).to have_content("Name: #{second.name}")

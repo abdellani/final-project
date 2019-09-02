@@ -5,9 +5,11 @@ require 'rails_helper'
 RSpec.describe Comment, type: :model do
   describe 'Content' do
     before :each do
-      @creator = User.create(name: 'creator', email: 'creator@email.com', password: '123465')
+      @creator = User.create(name: 'creator', email: 'creator@email.com',
+                             password: '123465')
       @post = @creator.posts.create(content: 'New post')
-      @comment = @post.comments.create(content: 'this a comment', user_id: @creator.id)
+      @comment = @post.comments.create(content: 'this a comment',
+                                       user_id: @creator.id)
       expect(@comment.valid?).to eql(true)
     end
     it 'should be not be empty' do
