@@ -5,13 +5,22 @@ class LikesController < ApplicationController
   def create
     @like = Like.new
     @like.user = current_user
-    @like.post = Post.find(params[:post_id])
+    @like.post = Post.find(params[:id])
     @like.save
-    redirect_back(fallback_location: root_path)
+    @status = params[:status]
+    if @status == 'show'
+      redirect_to post_path(params[:id])
+    else
+      redirect_back(fallback_location: root_path)
+    end
   end
 
   def destroy
-    current_user.likes.each { |like| like.destroy if like.post_id == params[:post_id].to_i }
-    redirect_back(fallback_location: root_path)
+    current_user.likes.each { |like| like.destroy if like.post_id == params[:id].to_i }
+    if @status == 'show'
+      redirect_to post_path(params[:id])
+    else
+      redirect_back(fallback_location: root_path)
+    end
   end
 end
