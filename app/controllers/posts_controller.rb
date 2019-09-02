@@ -1,6 +1,12 @@
+# frozen_string_literal: true
+
 class PostsController < ApplicationController
   before_action :authenticate_user!
-  before_action :check_owner, only: [:update,:edit,:destroy]
+  before_action :check_post, only: %i[show edit destroy update]
+  before_action only: %i[update edit destroy] do
+    owner?(@post.author)
+  end
+
   def index
     @posts = Post.all
   end
@@ -9,42 +15,42 @@ class PostsController < ApplicationController
     @post = Post.new
   end
 
-  def create 
+  def create
     user = current_user
-    post = user.posts.build(post_params)
-    if post.save
+    @post = user.posts.build(post_params)
+    if @post.save
       redirect_to root_path
     else
       render :new
     end
   end
+
+  def show
+    @new_comment = Comment.new
+  end
+
+  def edit; end
+
   def update
-    @post = Post.find(params[:id])
-    if @post.update_attributes(content:params[:post][:content])
+    if @post.update_attributes(post_params)
       redirect_to post_path(@post)
     else
       render :edit
     end
   end
-  def show
-    @post = Post.find(params[:id])
-  end
-  def edit
-    @post = Post.find(params[:id])
-  end
-  def destroy 
-    @post = Post.find(params[:id])
+
+  def destroy
     @post.destroy
     redirect_to root_path
   end
+
   private
-  def check_owner 
-    @post = Post.find(params[:id])
-    if current_user != @post.author
-      redirect_to root_path
-    end
-  end
+
   def post_params
     params.require(:post).permit(:content)
+  end
+
+  def check_post
+    @post = Post.find(params[:id])
   end
 end

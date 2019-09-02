@@ -1,14 +1,15 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
- 
   before :each do
-    @user = User.create(name:'testgen', email:'testgen@test.com', password:'123456')
+    @user = User.create(name: 'testgen', email: 'testgen@test.com', password: '123456')
   end
 
   describe '#email' do
     it 'validates for presence of email adress' do
-      @user.email = '' 
+      @user.email = ''
       @user.valid?
       expect(@user.errors[:email]).to include("can't be blank")
 
@@ -18,13 +19,13 @@ RSpec.describe User, type: :model do
     end
 
     it 'validates for format of email adress' do
-      @user.email = 'test@test..com' 
+      @user.email = 'test@test..com'
       @user.valid?
-      expect(@user.errors[:email]).to include("is invalid")
+      expect(@user.errors[:email]).to include('is invalid')
 
       @user.email = 'test3334@gmail.com'
       @user.valid?
-      expect(@user.errors[:email]).to_not include("is invalid")
+      expect(@user.errors[:email]).to_not include('is invalid')
     end
 
     it 'validates email uniquness' do
@@ -33,7 +34,7 @@ RSpec.describe User, type: :model do
       user.email = 'testgen@test.com'
       user.password = '123456'
       user.valid?
-      expect(user.errors[:email]).to include("has already been taken")
+      expect(user.errors[:email]).to include('has already been taken')
 
       user.name = 'test33'
       user.email = 'testgen22@test.com'
@@ -60,7 +61,7 @@ RSpec.describe User, type: :model do
       expect(@user.errors[:password]).to include("can't be blank")
 
       @user.password = '123456'
-      expect(@user.valid?).to eql(true)      
+      expect(@user.valid?).to eql(true)
     end
 
     it 'validates the password confirmation' do
@@ -70,7 +71,7 @@ RSpec.describe User, type: :model do
       expect(@user.errors[:password_confirmation]).to include("doesn't match Password")
 
       @user.password = '123456'
-      expect(@user.valid?).to eql(true)      
+      expect(@user.valid?).to eql(true)
     end
   end
 end

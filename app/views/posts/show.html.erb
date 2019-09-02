@@ -2,6 +2,28 @@
   <li>Content : <%= @post.content %></li>
   <li>Author : <%= @post.author.name %></li>
   <li>Date : <%= @post.created_at.strftime('%m/%d/%Y') %></li>
-  <li> <%= link_to "Edit", edit_post_path(@post) %> </li>
-  <li> <%= link_to "Delete", post_path(@post), method: :delete %> </li>
+  <li>Likes : <%= @post.likes.count %></li>
+
+  <% if @post.likes.any? {|like| like.user == current_user}%>
+    <li> <%= link_to "Unlike", like_path(post_id: @post.id), method: :delete %> </li>
+  <% else %>
+    <li> <%= link_to "Like", likes_path(post_id: @post.id), method: :post %> </li>
+  <% end %>
+  <% if current_user == @post.author %>
+    <li> <%= link_to "Edit", edit_post_path(@post) %> </li>
+    <li> <%= link_to "Delete", post_path(@post), method: :delete %> </li>
+  <% end %>
 </ul>
+<h1>Comments :</h1>
+<% @post.comments.each do |comment|%>
+<ul>
+  <li><%= comment.content%></li>
+  <li><%= comment.user.name%></li>
+  <li><%= comment.created_at.strftime('%m/%d/%Y') %></li>
+  <% if current_user == comment.user %>
+  <li><%= link_to "Edit", edit_comment_path(comment)%></li>
+  <li><%= link_to "Delete", comment_path(comment), method: :delete %></li>
+  <%end%>
+</ul>
+<% end %>
+<%= render "posts/comment_form" %>
