@@ -24,14 +24,14 @@
 
 #wrapper {
   position: fixed;
-  top:0;
-  left:0;
-  right:0;
-  bottom:0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   height: 100vh;
   width: 100vw;
   background-image: image-url("background_login.png");
-  background-color: rgba(0,0,0,0.2);
+  background-color: rgba(0, 0, 0, 0.3);
   background-blend-mode: color;
   background-size: cover;
 
@@ -42,13 +42,19 @@
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   padding: 20px;
+  box-shadow: 5px 5px 2px 1px rgba(0, 0, 0, 0.2);
 
 }
 
 #links-wrapper {
-  background: linear-gradient(to bottom, rgba(32, 178, 170, 0.9) 0%, rgba(255, 255, 255, 1) 100%);
+  background: rgba(32, 178, 170, 0.9);
   margin: 0;
   padding: 20px;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
+  box-shadow: 5px 5px 2px 1px rgba(0, 0, 0, 0.2);
+
+  a {
+    color: white;
+  }
 }

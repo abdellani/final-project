@@ -8,25 +8,26 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 </head>
-<body>
-    <%if user_signed_in?%>
-      <header>
-          <%= render 'layouts/navbar' %>
-      </header>
-    <% end %>
+
+<body class='bg-light'>
+  <%if user_signed_in?%>
+  <header>
+    <%= render 'layouts/navbar' %>
+  </header>
+  <% end %>
   <%if !notice.nil?  %>
-    <div class='text-center w-100'>
-      <p class="notice bg-success text-white py-3"><%= notice %></p>
-    </div>
+  <div class='text-center w-100'>
+    <p class="notice bg-success text-white py-3"><%= notice %></p>
+  </div>
   <% end %>
   <%if !alert.nil? %>
-    <div class='text-center w-100'>
-      <p class="alert bg-danger text-white"><%= alert %></p>
-    </div>
+  <div class='text-center w-100'>
+    <p class="alert bg-danger text-white"><%= alert %></p>
+  </div>
   <% end %>
   <div class="container">
-   <%= yield %> 
-   </div>
+    <%= yield %>
+  </div>
 </body>
 
 </html>

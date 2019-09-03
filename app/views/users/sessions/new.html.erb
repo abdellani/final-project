@@ -3,12 +3,12 @@
     <div class='col-md-4 mx-auto my-auto'>
       <div class="text-center" id='login-wrapper'>
         <h4>LOG IN</h4>
-      <%if !alert.nil? %>
+        <%if !alert.nil? %>
         <div class='text-center w-100'>
           <p class="alert bg-danger text-white"><%= alert %></p>
         </div>
-      <% end %>
-      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <% end %>
+        <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
         <div class="input-group mb-3">
           <div class="input-group-prepend">
             <span class="input-group-text" id="basic-addon1"><i class="fa fa-envelope"></i></span>
