@@ -18,18 +18,21 @@
 @import "bootstrap-social";
 @import "font-awesome";
 
-.bg-white {
-  background-color: white;
+.bg-teal {
+  background-color: rgba(32, 178, 170, 1);
 }
 
-
-
-
-
 #wrapper {
+  position: fixed;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
   height: 100vh;
   width: 100vw;
   background-image: image-url("background_login.png");
+  background-color: rgba(0,0,0,0.2);
+  background-blend-mode: color;
   background-size: cover;
 
 }

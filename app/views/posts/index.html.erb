@@ -1,5 +1,54 @@
-<div class='row'>
-  <div class='col-6 bg-success'>
+<div class="row">
+  <div class="col-md-4 mx-auto">
+    <div class="card text-center">
+      <div class="card-header">
+        Featured1
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">Special title treatment</h5>
+        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+      </div>
+      <div class="card-footer text-muted">
+        2 days ago
+      </div>
+    </div>
+  </div>
+  <div class="col-md-8 mx-auto">
+
+
+
+    <div class="card mb-3">
+      <div class="card-header m-0 row bg-white">
+          <div class="col-1">
+            <%= image_tag "https://secure.gravatar.com/avatar/3acc837f898bdaa338b7cd7a9ab6dd5b?s=50", class:"rounded-circle" %>
+          </div>
+          <div class="col-11 text-left">
+            Author name
+            <br/>
+            Date
+          </div>
+      </div>
+      <div class="card-body">
+        <p class="card-text">the content</p>
+      </div>
+      <div class="card-footer bg-white">
+        <a href="#"><i class="fa fa-lg fa-thumbs-up"></i></a>
+        <a href="#"><i class="fa fa-lg fa-thumbs-down"></i></a>
+        <div class="d-inline ">
+          Like : 0 
+        </div>
+        <div class="float-right">
+        <a href="#" class="btn btn-primary">show</a>
+        <a href="#" class="ml-2 btn btn-danger">delete</a>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</div>
+<div class="border">
     <h2>All posts</h2>
 
     <% @posts.each do |p| %>
@@ -20,5 +69,4 @@
       <%end%>
     </ul>
     <% end %>
-  </div>
 </div>
