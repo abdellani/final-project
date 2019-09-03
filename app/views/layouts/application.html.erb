@@ -10,9 +10,16 @@
 </head>
 
 <body>
+  <%if user_signed_in?%>
   <%= render 'layouts/navbar' %>
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
+  <% end %>
+  <%if !notice.nil? || !alert.nil? %>
+  <div class='position-absolute text-center w-100'>
+    <p class="notice bg-succes text-white"><%= notice %></p>
+    <p class="alert bg-danger text-white"><%= alert %></p>
+  </div>
+  <% end %>
+
   <%= yield %>
 </body>
 

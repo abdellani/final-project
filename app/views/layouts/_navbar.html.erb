@@ -1,4 +1,3 @@
-<% if user_signed_in? %>
 <%= image_tag current_user.image_link %>
 Welcome: <%= current_user.name.capitalize%>
 <%= link_to 'Home', root_path%>
@@ -9,4 +8,3 @@ Welcome: <%= current_user.name.capitalize%>
 <%= link_to 'Friends', users_path(filter: 'friends')%>
 <%= link_to 'Notifications', users_path(filter: 'pending')%>
 <%= link_to 'Logout', destroy_user_session_path, method: :delete%>
-<% end %>

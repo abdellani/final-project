@@ -10,6 +10,42 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
- *= require_tree .
- *= require_self
+
  */
+
+
+@import "bootstrap";
+@import "bootstrap-social";
+@import "font-awesome";
+
+.bg-white {
+  background-color: white;
+}
+
+
+
+
+
+#wrapper {
+  height: 100vh;
+  width: 100vw;
+  background-image: image-url("background_login.png");
+  background-size: cover;
+
+}
+
+#login-wrapper {
+  background-color: rgba(32, 178, 170, 0.9);
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  padding: 20px;
+
+}
+
+#links-wrapper {
+  background: linear-gradient(to bottom, rgba(32, 178, 170, 0.9) 0%, rgba(255, 255, 255, 1) 100%);
+  margin: 0;
+  padding: 20px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
