@@ -1,12 +1,15 @@
-<% if current_page?(edit_comment_path)%>
-<h3>Edit this comment:</h3>
-<% else %>
+<% if current_page?(post_path(@post))%>
 <h3>Add new comment:</h3>
+<% else %>
+<h3>Edit this comment:</h3>
 <% end %>
 
-
-
 <%= form_for @new_comment do |f| %>
+<% if @new_comment.errors.any? %>
+<% @new_comment.errors.full_messages.each do |message| %>
+<li><%= message %></li>
+<% end %>
+<% end %>
 <%= f.text_field :content %>
 <%= f.hidden_field :post_id, value:@post.id%>
 <%= f.submit "Submit" %>

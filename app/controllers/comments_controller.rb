@@ -9,8 +9,7 @@ class CommentsController < ApplicationController
 
   def create
     @post = Post.find(params[:comment][:post_id])
-    @new_comment = Comment.new(content: params[:comment][:content],
-                               post_id: params[:comment][:post_id], user_id: current_user.id)
+    @new_comment = current_user.comments.build(comment_params)
     if @new_comment.save
       redirect_back(fallback_location: root_path)
     else
@@ -42,5 +41,9 @@ class CommentsController < ApplicationController
 
   def check_comment
     @new_comment = Comment.find(params[:id])
+  end
+
+  def comment_params
+    params.require(:comment).permit(:content, :post_id)
   end
 end
