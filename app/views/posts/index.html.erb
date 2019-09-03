@@ -32,7 +32,7 @@
         </div>
         <div class="card-footer bg-white">
           <% if p.likes.any? {|like| like.user == current_user}%>
-            <%= link_to "", like_path(id: p.id,post_id: p.id), 
+            <%= link_to "",  like_path(id: p.id), 
             method: :delete,class:"fa fa-lg fa-thumbs-down" %> 
           <% else %>
             <%= link_to "", likes_path(post_id: p.id),
