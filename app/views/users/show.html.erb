@@ -8,13 +8,13 @@
   <%if current_user != @user%>
   <h3>Friendship Status:</h3>
   <% if @user.find_friends.any?{ |f| f==current_user} %>
-  You are friends with: <%=@user.name%>
+  You are friend with: <%=@user.name%>
   <li><%= link_to "Unfriend", friendship_path(id:@user.id), method: :delete %></li>
   <% elsif @user.pending_friends.any?{ |f| f==current_user} %>
   <%=@user.name%> sent you friend request!
   <%= accept_reject_pending(@user.id) %>
   <% else %>
-  You are not friends with: <%=@user.name%>
+  You are not friend with: <%=@user.name%>
   <%= link_to 'Add as friend', friendships_path(user_id:@user.id), method: :post%>
   <%end%>
   <%end%>

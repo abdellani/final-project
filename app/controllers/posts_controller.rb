@@ -8,7 +8,9 @@ class PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.all
+    @posts=current_user.posts
+    current_user.find_friends.each{|user| @posts+=user.posts}
+    @posts.sort!{|a,b| b.created_at-a.created_at }
   end
 
   def new

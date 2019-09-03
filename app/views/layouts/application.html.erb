@@ -14,11 +14,15 @@
           <%= render 'layouts/navbar' %>
       </header>
     <% end %>
-  <%if !notice.nil? || !alert.nil? %>
-  <div class='position-absolute text-center w-100'>
-    <p class="notice bg-succes text-white"><%= notice %></p>
-    <p class="alert bg-danger text-white"><%= alert %></p>
-  </div>
+  <%if !notice.nil?  %>
+    <div class='text-center w-100'>
+      <p class="notice bg-success text-white py-3"><%= notice %></p>
+    </div>
+  <% end %>
+  <%if !alert.nil? %>
+    <div class='text-center w-100'>
+      <p class="alert bg-danger text-white"><%= alert %></p>
+    </div>
   <% end %>
   <div class="container">
    <%= yield %> 

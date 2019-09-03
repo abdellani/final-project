@@ -3,27 +3,24 @@
     <div class='col-md-4 mx-auto my-auto'>
       <div class="text-center" id='login-wrapper'>
         <h4>LOG IN</h4>
-
-        <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-
-
-
+      <%if !alert.nil? %>
+        <div class='text-center w-100'>
+          <p class="alert bg-danger text-white"><%= alert %></p>
+        </div>
+      <% end %>
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
         <div class="input-group mb-3">
           <div class="input-group-prepend">
             <span class="input-group-text" id="basic-addon1"><i class="fa fa-envelope"></i></span>
           </div>
           <%= f.email_field :email, autofocus: true, class: 'form-control', 'aria-describedby' => "basic-addon1",placeholder: "login@example.com",autocomplete: "email" %>
         </div>
-
-
-
         <div class="input-group mb-3">
           <div class="input-group-prepend">
             <span class="input-group-text pr-3" id="password-addon"><i class="fa fa-lg fa-lock"></i></span>
           </div>
           <%= f.password_field :password, autofocus: true, class: 'form-control','aria-describedby' => "password-addon", placeholder: "Enter your password",autocomplete: "current-password" %>
         </div>
-
 
         <% if devise_mapping.rememberable? %>
         <div class="field">
