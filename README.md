@@ -1,4 +1,4 @@
-# About the program 
+# About the program
 
 This project is a facebook-like web application, where a user can share content, build relationships with other users, and express his points of view.
 
