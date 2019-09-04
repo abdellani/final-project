@@ -46,6 +46,7 @@ Authentication
 - Login with invalid email
 - Login with invalid password
 - Log out after login
+- Login using facebook account
 
 Users management
 

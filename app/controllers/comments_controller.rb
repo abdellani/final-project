@@ -19,8 +19,8 @@ class CommentsController < ApplicationController
 
   def edit
     @post = @new_comment.post
-    @comments = @post.comments 
-    @comments=@comments.sort{|a,b| a.created_at-b.created_at } unless @comments.empty?
+    @comments = @post.comments
+    @comments = @comments.sort { |a, b| a.created_at - b.created_at } unless @comments.empty?
     render 'posts/show'
   end
 
