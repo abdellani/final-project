@@ -4,13 +4,13 @@
 <h3>Edit this comment:</h3>
 <% end %>
 
-<%= form_for @new_comment do |f| %>
+<%= form_for @new_comment, html: {class:"mb-4"} do |f| %>
 <% if @new_comment.errors.any? %>
 <% @new_comment.errors.full_messages.each do |message| %>
 <li><%= message %></li>
 <% end %>
 <% end %>
-<%= f.text_field :content %>
+<%= f.text_area :content,class:"form-control", rows:"2" %>
 <%= f.hidden_field :post_id, value:@post.id%>
-<%= f.submit "Submit" %>
+<%= f.submit "Submit",class:"btn btn-primary btn-block mt-2" %>
 <%end%>
