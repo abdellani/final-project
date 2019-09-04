@@ -13,12 +13,12 @@ feature 'Posts' do
       expect(page).to have_content('Signed in successfully.')
     end
     scenario 'User can create post' do
-      visit new_post_path
+      visit root_path
       fill_in 'post_content', with: 'new post'
-      click_button 'Create Post'
+      click_button 'Submit'
       expect(page).to have_current_path(root_path)
-      expect(page).to have_content("Author : #{@user.name}")
-      expect(page).to have_content('Content : new post')
+      expect(page).to have_content("#{@user.name}")
+      expect(page).to have_content('new post')
     end
     scenario 'User can update his posts' do
       @post = @user.posts.build(content: 'New post')
@@ -27,7 +27,7 @@ feature 'Posts' do
       click_on 'Edit'
       expect(page).to have_current_path(edit_post_path(@post))
       fill_in 'post_content', with: 'Edited post'
-      click_button 'Update Post'
+      click_button 'Submit'
       expect(page).to have_current_path(post_path(@post))
       expect(page).to have_content('Edited post')
     end
@@ -53,9 +53,10 @@ feature 'Posts' do
       @post = @user1.posts.build(content: 'New post to delete')
       @post.save
       visit post_path @post
-      click_on 'Delete'
-      expect(page).to have_current_path(root_path)
-      expect(page).to have_content('New post to delete')
+      expect(page).to_not have_content('Delete')
+      page.driver.delete(post_path(@post))
+      expect(page).to have_current_path(post_path(@post))
+      expect(Post.last.content).to eql('New post to delete')
     end
   end
   describe 'As Unauthenticated user ' do

@@ -11,7 +11,7 @@ class PostsController < ApplicationController
     @post = Post.new
     @posts=current_user.posts
     current_user.find_friends.each{|user| @posts+=user.posts}
-    @posts.sort!{|a,b| b.created_at-a.created_at } unless @posts.empty?
+    @posts = @posts.sort{|a,b| b.created_at-a.created_at } unless @posts.empty?
   end
 
   def new
