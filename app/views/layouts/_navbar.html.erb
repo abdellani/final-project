@@ -1,6 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-teal py-1">
   <a class="navbar-brand" href="#">Final project</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
+    aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarNav">
@@ -15,7 +16,7 @@
         <%= link_to 'Create new post', new_post_path, class:"nav-link"%>
       </li>
       <li class="nav-item">
-      <%= link_to 'Edit account', edit_user_registration_path, class:"nav-link"%>
+        <%= link_to 'Edit account', edit_user_registration_path, class:"nav-link"%>
       </li>
       <li class="nav-item">
         <%= link_to 'Profile', user_path(current_user), class:"nav-link"%>
@@ -33,7 +34,7 @@
   </div>
 </nav>
 
-<div class="py-1  px-5 mb-4 border-bottom">
+<div class="py-1  px-5 mb-4 shadow-sm">
   <%= image_tag current_user.image_link+"?s=50",class:"rounded-circle" %>
   Welcome: <%= current_user.name.capitalize%>
 </div>

@@ -1,33 +1,65 @@
-<ul>
-  <%= image_tag @user.image_link %>
-  <li>Name: <%=@user.name%></li>
-  <li>Email: <%=@user.email%></li>
-  <% if current_user == @user%>
-  <li><%= link_to "Edit Profile", edit_user_registration_path %> </li>
-  <%end%>
-  <%if current_user != @user%>
-  <h3>Friendship Status:</h3>
-  <% if @user.find_friends.any?{ |f| f==current_user} %>
-  You are friend with: <%=@user.name%>
-  <li><%= link_to "Unfriend", friendship_path(id:@user.id), method: :delete %></li>
-  <% elsif @user.pending_friends.any?{ |f| f==current_user} %>
-  <%=@user.name%> sent you friend request!
-  <%= accept_reject_pending(@user.id) %>
-  <% else %>
-  You are not friend with: <%=@user.name%>
-  <%= link_to 'Add as friend', friendships_path(user_id:@user.id), method: :post%>
-  <%end%>
-  <%end%>
-</ul>
+<div class="container">
+  <div class="row">
+    <div class="col-md-4 shadow-sm rounded px-2 py-5 mb-2 text-center bg-white">
+      <%= image_tag @user.image_link+'?s=200', class:'img-fluid', alt:'Profile picture' %>
+      <div class='h5 mt-2 mb-0'><%=@user.name%></div>
+      <small class='text-muted pt-0'><%=@user.email%></small>
+      <small class='text-muted d-block pt-0'>Joined <%= time_ago_in_words @user.created_at %> ago</small>
+      <%if current_user != @user%>
+      <% if @user.find_friends.any?{ |f| f==current_user} %>
+      <%= link_to friendship_path(id:@user.id),class:'btn text-white btn-block btn-sm bg-danger mt-3', method: :delete do %>
+      <i class="fa fa-minus-circle"></i> Remove friend
+      <% end %>
+      <% elsif @user.pending_friends.any?{ |f| f==current_user} %>
+      <%= accept_reject_pending(@user.id) %>
+      <% else %>
+      <%= link_to friendships_path(user_id:@user.id), class: "btn text-white btn-block btn-sm bg-teal mt-3", method: :post do%>
+      <span class=" fa fa-user-plus"></span> Add as friend
+      <% end %>
 
-<h4>Posts:</h4>
-<% @user.posts.each do |p| %>
-<ul>
-  <li>Content : <%= p.content %></li>
-  <li>Date : <%= p.created_at.strftime('%m/%d/%Y') %></li>
-  <% if current_user == p.author %>
-  <li> <%= link_to "Edit", edit_post_path(p) %> </li>
-  <li> <%= link_to "Delete", post_path(p), method: :delete %> </li>
-  <%end%>
-</ul>
-<% end %>
+      <%end%>
+      <%end%>
+
+    </div>
+    <div class="col-md-8">
+      <% if @user == current_user || @user.find_friends.any?{ |f| f==current_user}%>
+      <% @user.posts.each do |p| %>
+      <div class="card shadow-sm border-0 mb-3">
+        <div class="card-header m-0 bg-white">
+
+          Published : <%= time_ago_in_words p.created_at %> ago
+        </div>
+        <div class="card-body">
+          <p class="card-text"><%= p.content %></p>
+        </div>
+        <div class="card-footer bg-white">
+          <% if p.likes.any? {|like| like.user == current_user}%>
+          <%= link_to "",  like_path(id: p.id), 
+            method: :delete,class:"fa fa-lg fa-thumbs-down" %>
+          <% else %>
+          <%= link_to "", likes_path(id: p.id),
+            method: :post,class:"fa fa-lg fa-thumbs-up" %>
+          <% end %>
+          <div class="d-inline ">
+            Like : <%= p.likes.count %>
+          </div>
+          <div class="float-right">
+            <%= link_to "Show", post_path(p),class:"btn btn-primary" %>
+            <% if current_user == p.author %>
+            <%= link_to "Edit", edit_post_path(p), class:"btn btn-primary" %>
+            <%= link_to "Delete", post_path(p), method: :delete, class:"ml-2 btn btn-danger" %>
+            <%end%>
+          </div>
+        </div>
+      </div>
+      <% end %>
+
+      <% else %>
+      <div class='shadow-sm rounded px-2 py-5 mb-2 text-center bg-white'>You can't see this users posts, you need to add
+        Them as friend!</div>
+      <% end %>
+
+
+    </div>
+  </div>
+</div>

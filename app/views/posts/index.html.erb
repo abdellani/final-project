@@ -16,40 +16,40 @@
   </div>
   <div class="col-md-8 mx-auto">
     <% @posts.each do |p| %>
-      <div class="card mb-3">
-        <div class="card-header m-0 row bg-white">
-          <div class="col-1">
-            <%= image_tag "https://secure.gravatar.com/avatar/3acc837f898bdaa338b7cd7a9ab6dd5b?s=50", class:"rounded-circle" %>
-          </div>
-          <div class="col-11 text-left">
-            <%= p.author.name %>
-            <br/>
-            Published : <%= time_ago_in_words p.created_at %> ago
-          </div>
+    <div class="card mb-3">
+      <div class="card-header m-0 row bg-white">
+        <div class="col-1">
+          <%= image_tag "https://secure.gravatar.com/avatar/3acc837f898bdaa338b7cd7a9ab6dd5b?s=50", class:"rounded-circle" %>
         </div>
-        <div class="card-body">
-          <p class="card-text"><%= p.content %></p>
-        </div>
-        <div class="card-footer bg-white">
-          <% if p.likes.any? {|like| like.user == current_user}%>
-            <%= link_to "",  like_path(id: p.id), 
-            method: :delete,class:"fa fa-lg fa-thumbs-down" %> 
-          <% else %>
-            <%= link_to "", likes_path(post_id: p.id),
-            method: :post,class:"fa fa-lg fa-thumbs-up" %> 
-          <% end %>
-          <div class="d-inline ">
-            Like : <%= p.likes.count %> 
-          </div>
-          <div class="float-right">
-          <%= link_to "Show", post_path(p),class:"btn btn-primary" %>
-            <% if current_user == p.author %>
-            <%= link_to "Edit", edit_post_path(p), class:"btn btn-primary" %> 
-            <%= link_to "Delete", post_path(p), method: :delete, class:"ml-2 btn btn-danger" %>
-            <%end%>
-          </div>
+        <div class="col-11 text-left">
+          <%= p.author.name %>
+          <br />
+          Published : <%= time_ago_in_words p.created_at %> ago
         </div>
       </div>
+      <div class="card-body">
+        <p class="card-text"><%= p.content %></p>
+      </div>
+      <div class="card-footer bg-white">
+        <% if p.likes.any? {|like| like.user == current_user}%>
+        <%= link_to "",  like_path(id: p.id), 
+            method: :delete,class:"fa fa-lg fa-thumbs-down" %>
+        <% else %>
+        <%= link_to "", likes_path(id: p.id),
+            method: :post,class:"fa fa-lg fa-thumbs-up" %>
+        <% end %>
+        <div class="d-inline ">
+          Like : <%= p.likes.count %>
+        </div>
+        <div class="float-right">
+          <%= link_to "Show", post_path(p),class:"btn btn-primary" %>
+          <% if current_user == p.author %>
+          <%= link_to "Edit", edit_post_path(p), class:"btn btn-primary" %>
+          <%= link_to "Delete", post_path(p), method: :delete, class:"ml-2 btn btn-danger" %>
+          <%end%>
+        </div>
+      </div>
+    </div>
     <% end %>
   </div>
 </div>
