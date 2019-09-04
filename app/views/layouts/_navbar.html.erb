@@ -8,6 +8,5 @@ Welcome: <%= current_user.name.capitalize%>
 <%= link_to 'Profile', user_path(current_user)%>
 <%= link_to 'Friends', users_path(filter: 'friends')%>
 <%= link_to 'Notifications', users_path(filter: 'pending')%>
-
 <%= link_to 'Logout', destroy_user_session_path, method: :delete%>
 <% end %>
