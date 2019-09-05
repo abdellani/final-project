@@ -10,7 +10,7 @@ feature 'Users managment' do
       fill_in 'user_email', with: 'test@test.com'
       fill_in 'user_password', with: '123456'
       fill_in 'user_password_confirmation', with: '123456'
-      click_button 'Sign up'
+      click_button 'Sign Up'
       expect(page).to have_content('Welcome! You have signed up successfully')
     end
 
@@ -20,7 +20,7 @@ feature 'Users managment' do
       fill_in 'user_email', with: 'test@test.com'
       fill_in 'user_password', with: '123456'
       fill_in 'user_password_confirmation', with: '123456'
-      click_button 'Sign up'
+      click_button 'Sign Up'
       expect(page).to have_current_path(user_registration_path)
       expect(page).to have_content("Name can't be blank")
     end
@@ -31,7 +31,7 @@ feature 'Users managment' do
       fill_in 'user_email', with: ''
       fill_in 'user_password', with: '123456'
       fill_in 'user_password_confirmation', with: '123456'
-      click_button 'Sign up'
+      click_button 'Sign Up'
       expect(page).to have_current_path(user_registration_path)
       expect(page).to have_content("Email can't be blank")
     end
@@ -43,7 +43,7 @@ feature 'Users managment' do
       fill_in 'user_email', with: 'test@test.com'
       fill_in 'user_password', with: '123456'
       fill_in 'user_password_confirmation', with: '123456'
-      click_button 'Sign up'
+      click_button 'Sign Up'
       expect(page).to have_current_path(user_registration_path)
       expect(page).to have_content('Email has already been taken')
     end
@@ -54,7 +54,7 @@ feature 'Users managment' do
       fill_in 'user_email', with: 'test@test.com'
       fill_in 'user_password', with: '12345'
       fill_in 'user_password_confirmation', with: '12345'
-      click_button 'Sign up'
+      click_button 'Sign Up'
       expect(page).to have_current_path(user_registration_path)
       expect(page).to have_content('Password is too short')
     end
@@ -76,14 +76,14 @@ feature 'Users managment' do
     scenario 'user can see his profile' do
       visit user_path(@user)
       expect(page).to have_current_path(user_path(@user))
-      expect(page).to have_content("Name: #{@user.name}")
+      expect(page).to have_content("#{@user.name}")
     end
     scenario 'user can see his profile' do
       second = User.create(name: 'other user', email: 'other@test.com',
                            password: '123456')
       visit user_path(second)
       expect(page).to have_current_path(user_path(second))
-      expect(page).to have_content("Name: #{second.name}")
+      expect(page).to have_content("#{second.name}")
     end
     scenario 'user can edit his profile' do
       visit edit_user_registration_path

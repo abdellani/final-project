@@ -16,41 +16,47 @@ feature 'Like' do
     scenario 'User can like his posts' do
       @post = @user.posts.create(content: 'text')
       visit root_path
-      expect(page).to_not have_content('Likes : 1')
-      click_on 'Like'
-      expect(page).to have_content('Likes : 1')
-      expect(page).to have_content('Unlike')
+      expect(page).to have_content('Like : 0')
+      expect(page).to have_css('.fa-thumbs-up')
+      click_link(class: 'fa-thumbs-up')
+      expect(page).to have_content('Like : 1')
+      expect(page).to have_css('.fa-thumbs-down')
     end
 
     scenario "User can like other's posts" do
       @user2 = User.create(name: 'test2', email: 'test2@test.com', password: '123456')
       @post = @user2.posts.create(content: 'text')
+      Friendship.create(sender:@user,receiver:@user2,status:true)
       visit root_path
-      expect(page).to_not have_content('Likes : 1')
-      click_on 'Like'
-      expect(page).to have_content('Likes : 1')
-      expect(page).to have_content('Unlike')
+      expect(page).to have_content('Like : 0')
+      click_link(class: 'fa-thumbs-up')
+      expect(page).to have_content('Like : 1')
+      expect(page).to have_css('.fa-thumbs-down')
     end
 
     scenario "User can't like a post more than once" do
       @post = @user.posts.create(content: 'text')
       visit post_path(@post)
-      expect(page).to_not have_content('Likes : 1')
-      click_on 'Like'
-      expect(page).to_not have_link('Like')
-      expect(page).to have_link('Unlike')
+      expect(page).to have_content('Like : 0')
+      expect(page).to have_css('.fa-thumbs-up')
+      click_link(class: 'fa-thumbs-up')
+      expect(page).to have_content('Like : 1')
+      expect(page).to have_css('.fa-thumbs-down')
+      page.driver.post(likes_path(id:@post.id))
+      expect(page).to have_content('Like : 1')
+      expect(page).to have_css('.fa-thumbs-down')
     end
 
     scenario 'User can revoke a like from a post that his liked' do
       @post = @user.posts.create(content: 'text')
       visit post_path(@post)
-      expect(page).to_not have_link('Unlike')
-      click_on 'Like'
-      expect(page).to_not have_link('Like')
-      expect(page).to have_link('Unlike')
-      expect(page).to have_content('Likes : 1')
-      click_on 'Unlike'
-      expect(page).to have_content('Likes : 0')
+      expect(page).to have_css('.fa-thumbs-up')
+      click_link(class: 'fa-thumbs-up')
+      expect(page).to_not have_css('.fa-thumbs-up')
+      expect(page).to have_css('.fa-thumbs-down')
+      expect(page).to have_content('Like : 1')
+      click_link(class: 'fa-thumbs-down')
+      expect(page).to have_content('Like : 0')
     end
   end
 end

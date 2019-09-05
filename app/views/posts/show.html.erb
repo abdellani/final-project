@@ -1,29 +1,62 @@
-<ul>
-  <li>Content : <%= @post.content %></li>
-  <li>Author : <%= @post.author.name %></li>
-  <li>Date : <%= @post.created_at.strftime('%m/%d/%Y') %></li>
-  <li>Likes : <%= @post.likes.count %></li>
-
-  <% if @post.likes.any? {|like| like.user == current_user}%>
-  <li> <%= link_to "Unlike", like_path(id: @post.id, status: 'show'), method: :delete %> </li>
-  <% else %>
-  <li> <%= link_to "Like", likes_path(id: @post.id, status: 'show'), method: :post %> </li>
-  <% end %>
-  <% if current_user == @post.author %>
-  <li> <%= link_to "Edit", edit_post_path(@post) %> </li>
-  <li> <%= link_to "Delete", post_path(@post), method: :delete %> </li>
-  <% end %>
-</ul>
+    <div class="card mb-3">
+      <div class="card-header m-0 row bg-white">
+        <div class="col-1">
+          <%= image_tag @post.author.image_link+"?s=50", class:"rounded-circle" %>
+        </div>
+        <div class="col-11 text-left">
+          <%= link_to @post.author.name, user_path(@post.author), class: ''%>
+          <br />
+          Published : <%= time_ago_in_words @post.created_at %> ago
+        </div>
+      </div>
+      <div class="card-body">
+        <p class="card-text"><%= @post.content %></p>
+      </div>
+      <div class="card-footer bg-white">
+        <% if @post.likes.any? {|like| like.user == current_user}%>
+        <%= link_to "",  like_path(id: @post.id), 
+            method: :delete,class:"fa fa-lg fa-thumbs-down" %>
+        <% else %>
+        <%= link_to "", likes_path(id: @post.id),
+            method: :post,class:"fa fa-lg fa-thumbs-up" %>
+        <% end %>
+        <div class="d-inline ">
+          Like : <%= @post.likes.count %>
+        </div>
+        <div class="float-right">
+          <% if current_user == @post.author %>
+          <%= link_to "Edit", edit_post_path(@post), class:"btn btn-primary" %>
+          <%= link_to "Delete", post_path(@post), method: :delete, class:"ml-2 btn btn-danger" %>
+          <%end%>
+        </div>
+      </div>
+    </div>
 <h1>Comments :</h1>
-<% @post.comments.each do |comment|%>
-<ul>
-  <li><%= comment.content%></li>
-  <li><%= comment.user.name%></li>
-  <li><%= comment.created_at.strftime('%m/%d/%Y') %></li>
-  <% if current_user == comment.user %>
-  <li><%= link_to "Edit", edit_comment_path(comment)%></li>
-  <li><%= link_to "Delete", comment_path(comment), method: :delete %></li>
-  <%end%>
-</ul>
-<% end %>
 <%= render "posts/comment_form" %>
+
+<% @comments.each do |comment|%>
+
+    <div class="card mb-3">
+      <div class="card-header m-0 row bg-white">
+        <div class="col-1">
+          <%= image_tag comment.user.image_link+"?s=50", class:"rounded-circle" %>
+        </div>
+        <div class="col-11 text-left">
+          <%= link_to comment.user.name, user_path(comment.user), class: ''%>
+          <br />
+          Published : <%= time_ago_in_words comment.created_at %> ago
+        </div>
+      </div>
+      <div class="card-body">
+        <p class="card-text"><%= comment.content %></p>
+      </div>
+      <div class="card-footer bg-white">
+        <div class="float-right">
+          <% if current_user == comment.user %>
+          <%= link_to "Edit", edit_comment_path(comment), class:"btn btn-primary" %>
+          <%= link_to "Delete", comment_path(comment), method: :delete, class:"ml-2 btn btn-danger" %> 
+          <%end%>
+        </div>
+      </div>
+    </div>
+<% end %>

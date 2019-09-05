@@ -1,10 +1,12 @@
 <%= form_for @post do |p|%>
 <% if @post.errors.any? %>
-<% @post.errors.full_messages.each do |message| %>
-<li><%= message %></li>
-<% end %>
+  <ul class="list-group">
+    <% @post.errors.full_messages.each do |message| %>
+      <li class="list-group-item bg-warning"><%= message %></li>
+    <% end %>
+  </ul>
 <% end %>
 <%= p.label :content%>
-<%= p.text_field :content%>
-<%= p.submit @text%>
+<%= p.text_area :content, class:"form-control", rows:"5"%>
+<%= p.submit value:"Submit",class:"btn btn-primary btn-block mt-2"%>
 <% end %>

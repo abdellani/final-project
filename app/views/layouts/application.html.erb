@@ -9,11 +9,25 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 </head>
 
-<body>
-  <%= render 'layouts/navbar' %>
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
-  <%= yield %>
+<body class='bg-light'>
+  <%if user_signed_in?%>
+  <header>
+    <%= render 'layouts/navbar' %>
+  </header>
+  <% end %>
+  <%if !notice.nil?  %>
+  <div class='text-center w-100'>
+    <p class="notice bg-success text-white py-3"><%= notice %></p>
+  </div>
+  <% end %>
+  <%if !alert.nil? %>
+  <div class='text-center w-100'>
+    <p class="alert bg-danger text-white"><%= alert %></p>
+  </div>
+  <% end %>
+  <div class="container">
+    <%= yield %>
+  </div>
 </body>
 
 </html>

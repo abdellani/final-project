@@ -1,35 +1,61 @@
-<h2>Sign up </h2>
+<div id="wrapper">
+  <div class="row h-100">
+    <div class='col-md-4 mx-auto my-auto'>
+      <div class="text-center" id='login-wrapper'>
+        <h4>SIGN UP</h4>
+        <%= render "users/shared/error_messages", resource: resource %>
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-user"><i class="fa fa-user"></i></span>
+          </div>
+          <%= f.text_field :name, autofocus: true, autocomplete: "name", class: 'form-control','aria-describedby' => "basic-user", placeholder: 'First and last name' %>
+        </div>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1"><i class="fa fa-envelope"></i></span>
+          </div>
+          <%= f.email_field :email,  class: 'form-control', 'aria-describedby' => "basic-addon1",placeholder: "login@example.com",autocomplete: "email" %>
+        </div>
 
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
+
+        <% if @minimum_password_length %>
+        <small>(<%= @minimum_password_length %> characters minimum)</small>
+        <% end %><br />
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text pr-3" id="password-addon"><i class="fa fa-lg fa-lock"></i></span>
+          </div>
+          <%= f.password_field :password, class: 'form-control','aria-describedby' => "password-addon", placeholder: "Enter your password",autocomplete: "new-password" %>
+
+        </div>
+
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text pr-3" id="password-addon2"><i class="fa fa-lg fa-lock"></i></span>
+          </div>
+          <%= f.password_field :password_confirmation, class: 'form-control','aria-describedby' => "password-addon2", placeholder: "Confirm password",autocomplete: "new-password" %>
+        </div>
+
+
+
+        <% if devise_mapping.rememberable? %>
+        <div class="field">
+          <%= f.check_box :remember_me %>
+          <%= f.label :remember_me %>
+        </div>
+        <% end %>
+
+        <div class="actions">
+          <%= f.submit "Sign Up", class:'btn btn-block btn-facebook' %>
+        </div>
+        <% end %>
+      </div>
+      <div class="links border-top border-dark text-center" id='links-wrapper'>
+        <%= render "users/shared/links" %>
+      </div>
+    </div>
+
   </div>
-
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
-
-<%= render "users/shared/links" %> 
+</div>

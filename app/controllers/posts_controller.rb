@@ -8,7 +8,10 @@ class PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.all
+    @post = Post.new
+    @posts = current_user.posts
+    current_user.find_friends.each { |user| @posts += user.posts }
+    @posts = @posts.sort { |a, b| b.created_at - a.created_at } unless @posts.empty?
   end
 
   def new
@@ -27,6 +30,8 @@ class PostsController < ApplicationController
 
   def show
     @new_comment = Comment.new
+    @comments = @post.comments
+    @comments = @comments.sort { |a, b| a.created_at - b.created_at } unless @comments.empty?
   end
 
   def edit; end

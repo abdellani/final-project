@@ -1,6 +1,6 @@
 # Live demo
 
-You can check for live demo here -- [Demo link](https://fast-wave-25233.herokuapp.com/)
+You can check for live demo [Here](https://fast-wave-25233.herokuapp.com/)
 
 # About the program
 
@@ -46,6 +46,7 @@ Authentication
 - Login with invalid email
 - Login with invalid password
 - Log out after login
+- Login using facebook account
 
 Users management
 
