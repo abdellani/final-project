@@ -9,6 +9,8 @@ class CommentsController < ApplicationController
 
   def create
     @post = Post.find(params[:comment][:post_id])
+    @comments = @post.comments
+    @comments = @comments.sort { |a, b| a.created_at - b.created_at } unless @comments.empty?
     @new_comment = current_user.comments.build(comment_params)
     if @new_comment.save
       redirect_back(fallback_location: root_path)
