@@ -14,4 +14,10 @@ module ApplicationHelper
       content_tag(:div, 'request pending', class: 'btn btn-sm mt-3 btn-block btn-info')
     end
   end
+
+  def pending_request_count
+    return current_user.friendship_received.select { |u| u.status == false }.count if current_user
+
+    0
+  end
 end

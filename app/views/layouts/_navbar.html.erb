@@ -21,9 +21,14 @@
       <li class="nav-item">
         <%= link_to 'Friends', users_path(filter: 'friends'), class:"nav-link"%>
       </li>
-      <li class="nav-item">
-        <%= link_to 'Notifications', users_path(filter: 'pending'), class:"nav-link"%>
-      </li>
+      <%if pending_request_count>0%>
+        <li class="nav-item">
+          <%= link_to  users_path(filter: 'pending'), class:"nav-link" do %>
+            Notifications
+            <span class="badge badge-pill d-inline badge-danger"><%= pending_request_count  %></span>
+          <%end%>
+        </li>
+      <%end%>
       <li class="nav-item">
         <%= link_to 'Logout', destroy_user_session_path, method: :delete, class:"nav-link"%>
       </li>
