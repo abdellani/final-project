@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-4 shadow-sm rounded px-2 py-5 mb-2 text-center bg-white">
+    <div class="col-md-4 shadow-sm rounded px-2 py-5 mb-2 text-center bg-teal">
       <%= image_tag @user.image_link+'?s=200', class:'img-fluid', alt:'Profile picture' %>
       <div class='h5 mt-2 mb-0'><%=@user.name%></div>
       <small class='text-muted pt-0'><%=@user.email%></small>
@@ -21,38 +21,50 @@
       <%end%>
 
     </div>
-    <div class="col-md-8">
-      <% if @user == current_user || @user.find_friends.any?{ |f| f==current_user}%>
-      <% @user.posts.each do |p| %>
-      <div class="card shadow-sm border-0 mb-3">
-        <div class="card-header m-0 bg-white">
-
+    
+    <div class="col-lg-8 mx-auto">
+    <% if @user == current_user || @user.find_friends.any?{ |f| f==current_user}%>
+    <% @user.posts.each do |p| %>
+    <div class="card mb-3">
+      <div class="card-header m-0 py-1 row bg-white">
+        <div class="col-xs-2 mr-2">
+          <%= image_tag p.author.image_link+"?s=50", class:"rounded-circle img-fluid" %>
+        </div>
+        <div class="col-xs-10 text-left">
+          <%= link_to p.author.name, user_path(p.author), class: ''%>
+          <br />
           Published : <%= time_ago_in_words p.created_at %> ago
         </div>
-        <div class="card-body">
-          <p class="card-text"><%= p.content %></p>
-        </div>
-        <div class="card-footer bg-white">
-          <% if p.likes.any? {|like| like.user == current_user}%>
-          <%= link_to "",  like_path(id: p.id), 
-            method: :delete,class:"fa fa-lg fa-thumbs-down" %>
-          <% else %>
-          <%= link_to "", likes_path(id: p.id),
-            method: :post,class:"fa fa-lg fa-thumbs-up" %>
-          <% end %>
+      </div>
+      <div class="card-body">
+        <p class="card-text"><%= p.content %></p>
+      </div>
+      <div class="card-footer bg-teal py-1 d-flex align-items-center justify-content-between">
+      <div>
+        <% if p.likes.any? {|like| like.user == current_user}%>
+        <%= link_to "",  like_path(id: p.id), 
+            method: :delete,class:"fa fa-lg fa-thumbs-up text-dark" %>
+        <% else %>
+        <%= link_to "", likes_path(id: p.id),
+            method: :post,class:"fa fa-lg fa-thumbs-up text-light" %>
+        <% end %>
           <div class="d-inline ">
-            Like : <%= p.likes.count %>
+            <% if p.likes.count != 0%>
+              <%= p.likes.count %>
+              
+            <% end %> 
           </div>
-          <div class="float-right">
-            <%= link_to "Comments", post_path(p),class:"btn btn-primary" %>
-            <% if current_user == p.author %>
-            <%= link_to "Edit", edit_post_path(p), class:"btn btn-primary" %>
-            <%= link_to "Delete", post_path(p), method: :delete, class:"ml-2 btn btn-danger" %>
-            <%end%>
-          </div>
+        </div>
+        <div class="float-right">
+          <%= link_to "Comments", post_path(p),class:"btn btn-sm btn-light" %>
+          <% if current_user == p.author %>
+          <%= link_to "Edit", edit_post_path(p), class:"btn btn-sm btn-light" %>
+          <%= link_to "Delete", post_path(p), method: :delete, class:"btn btn-sm btn-danger" %>
+          <%end%>
         </div>
       </div>
-      <% end %>
+    </div>
+    <% end %>
 
       <% else %>
       <div class='shadow-sm rounded px-2 py-5 mb-2 text-center bg-white'>You can't see this users posts, you need to add

@@ -1,10 +1,17 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-teal py-1">
-  <a class="navbar-brand" href="/">Final project</a>
+<nav class="navbar navbar-expand-lg navbar-light bg-teal mb-5">
+  <a class="navbar-brand" href="/">
+  <%= image_tag('snap.png', class:'img-fluid logoIndex')%>
+  </a>
+  <div class="user">
+  <%= image_tag current_user.image_link+"?s=40",class:"rounded-circle" %>
+    <%= current_user.name%>
+</div>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
     aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarNav">
+
+  <div class="collapse navbar-collapse d-lg-flex justify-content-end" id="navbarNav">
     <ul class="navbar-nav">
       <li class="nav-item">
         <%= link_to 'Home', root_path, class:"nav-link"%>
@@ -36,7 +43,3 @@
   </div>
 </nav>
 
-<div class="py-1  px-5 mb-4 shadow-sm">
-  <%= image_tag current_user.image_link+"?s=50",class:"rounded-circle" %>
-  Welcome: <%= current_user.name.capitalize%>
-</div>

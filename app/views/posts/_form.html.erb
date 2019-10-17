@@ -6,7 +6,6 @@
     <% end %>
   </ul>
 <% end %>
-<%= p.label :content%>
-<%= p.text_area :content, class:"form-control", rows:"5"%>
-<%= p.submit value:"Submit",class:"btn btn-primary btn-block mt-2"%>
+<%= p.text_area :content, class:"textarea text-center", placeholder:'Create new post!'%>
+<%= p.submit value:"Create",class:"btn bg-teal btn-block mt-1 mb-3"%>
 <% end %>

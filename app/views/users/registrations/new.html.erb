@@ -1,8 +1,8 @@
-<div id="wrapper">
-  <div class="row h-100">
-    <div class='col-md-4 mx-auto my-auto'>
+<div id="wrapper" class='row'>
+    <div class='col-md-6 mx-auto w-100 my-auto'>
       <div class="text-center" id='login-wrapper'>
-        <h4>SIGN UP</h4>
+      <%= image_tag('snap.png', class:'logoLogin') %>
+        <h5 class='mb-4'>Create new account</h5>
         <%= render "users/shared/error_messages", resource: resource %>
         <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
         <div class="input-group mb-3">
@@ -47,15 +47,15 @@
         </div>
         <% end %>
 
-        <div class="actions">
-          <%= f.submit "Sign Up", class:'btn btn-block btn-facebook' %>
+        <div class="actions d-flex justify-content-between w-100">
+          <%= f.submit "Sign Up", class:'btn btn-block btn-facebook mr-2' %>
+          <%- if controller_name != 'sessions' %>
+          <%= link_to "Log in", new_session_path(resource_name), class:'btn btn-block btn-facebook d-block' %><br />
+            <% end %>
         </div>
         <% end %>
       </div>
-      <div class="links border-top border-dark text-center" id='links-wrapper'>
-        <%= render "users/shared/links" %>
-      </div>
+      
     </div>
 
-  </div>
 </div>

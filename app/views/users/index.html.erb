@@ -1,8 +1,8 @@
 <div class="container">
   <div class="row">
     <% @users.each do |u|%>
-    <div class="col-md-3 px-1 mb-2 text-center">
-      <div class='w-100 h-100 shadow-sm py-4 px-3 bg-white'>
+    <div class="col-md-3 px-1 mb-2 text-center ">
+      <div class='w-100 h-100 shadow-sm py-4 px-3 bg-white rounded'>
         <%= image_tag u.image_link, class:'rounded-circle', alt:'Profile picture' %>
         <%= link_to u.name, user_path(u), class: 'h5 mt-2 mb-0 d-block'%>
         <small class='text-muted pt-0'><%=u.email%></small>
