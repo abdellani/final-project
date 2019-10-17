@@ -1,9 +1,9 @@
-    <div class="card mb-3">
-      <div class="card-header m-0 row bg-white">
-        <div class="col-1">
-          <%= image_tag @post.author.image_link+"?s=50", class:"rounded-circle" %>
+    <div class="card mb-3 mt-5">
+      <div class="card-header m-0 py-1 row bg-white">
+        <div class="col-xs-2 mr-2">
+          <%= image_tag @post.author.image_link+"?s=50", class:"rounded-circle img-fluid" %>
         </div>
-        <div class="col-11 text-left">
+        <div class="col-xs-10 text-left">
           <%= link_to @post.author.name, user_path(@post.author), class: ''%>
           <br />
           Published : <%= time_ago_in_words @post.created_at %> ago
@@ -12,51 +12,54 @@
       <div class="card-body">
         <p class="card-text"><%= @post.content %></p>
       </div>
-      <div class="card-footer bg-white">
+      <div class="card-footer bg-teal py-1 d-flex align-items-center justify-content-between">
+      <div>
         <% if @post.likes.any? {|like| like.user == current_user}%>
         <%= link_to "",  like_path(id: @post.id), 
-            method: :delete,class:"fa fa-lg fa-thumbs-down" %>
+            method: :delete,class:"fa fa-lg fa-thumbs-up text-dark" %>
         <% else %>
         <%= link_to "", likes_path(id: @post.id),
-            method: :post,class:"fa fa-lg fa-thumbs-up" %>
+            method: :post,class:"fa fa-lg fa-thumbs-up text-light" %>
         <% end %>
-        <div class="d-inline ">
-          Like : <%= @post.likes.count %>
+          <div class="d-inline ">
+            <% if @post.likes.count != 0%>
+              <%= @post.likes.count %>
+              
+            <% end %> 
+          </div>
         </div>
         <div class="float-right">
           <% if current_user == @post.author %>
-          <%= link_to "Edit", edit_post_path(@post), class:"btn btn-primary" %>
-          <%= link_to "Delete", post_path(@post), method: :delete, class:"ml-2 btn btn-danger" %>
+          <%= link_to "Edit", edit_post_path(@post), class:"btn btn-sm btn-light" %>
+          <%= link_to "Delete", post_path(@post), method: :delete, class:"btn btn-sm btn-danger" %>
           <%end%>
         </div>
       </div>
     </div>
-<h1>Comments :</h1>
-<%= render "posts/comment_form" %>
-
 <% @comments.each do |comment|%>
 
-    <div class="card mb-3">
-      <div class="card-header m-0 row bg-white">
-        <div class="col-1">
+    <div class="card mt-0">
+      <div class="card-header m-0 row bg-teal">
+        <div class="col-md-1">
           <%= image_tag comment.user.image_link+"?s=50", class:"rounded-circle" %>
         </div>
-        <div class="col-11 text-left">
+        <div class="col-lg-4 col-11 row text-left">
+        <div class='col-lg-12 col-6 mb-2 mb-lg-0'>
           <%= link_to comment.user.name, user_path(comment.user), class: ''%>
           <br />
           Published : <%= time_ago_in_words comment.created_at %> ago
-        </div>
-      </div>
-      <div class="card-body">
-        <p class="card-text"><%= comment.content %></p>
-      </div>
-      <div class="card-footer bg-white">
-        <div class="float-right">
+          </div>
+          <div class='commentButtons col-6 col-lg-12 text-right d-flex align-items-center'>
           <% if current_user == comment.user %>
-          <%= link_to "Edit", edit_comment_path(comment), class:"btn btn-primary" %>
-          <%= link_to "Delete", comment_path(comment), method: :delete, class:"ml-2 btn btn-danger" %> 
+          <%= link_to "Edit", edit_comment_path(comment), class:"btn btn-dark btn-sm mr-2" %>
+          <%= link_to "Delete", comment_path(comment), method: :delete, class:"btn btn-sm btn-danger" %> 
           <%end%>
+          </div>
         </div>
+      <div class="col-lg-7 d-flex align-items-center bg-white rounded">
+        <p class="card-text commentText"><%= comment.content %></p>
+      </div>
       </div>
     </div>
 <% end %>
+<%= render "posts/comment_form" %>

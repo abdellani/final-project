@@ -20,6 +20,7 @@
 
 body {
   background-color: #535353;
+  min-height: 100vh;
 }
 
 .bg-teal {
@@ -59,13 +60,19 @@ body {
   }
 }
 
-.navbar #wrapper {
+.commentText {
+  min-height: 70px;
+}
+
+.container {
+  height: auto;
+}
+
+#wrapper {
   display: flex;
-  margin: 0 auto;
   align-items: center;
   height: 100vh;
   width: 100%;
-  background-color: #535353;
 }
 
 .facebook {

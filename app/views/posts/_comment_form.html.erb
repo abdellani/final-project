@@ -1,7 +1,7 @@
 <% if current_page?(post_path(@post))%>
-<h3>Add new comment:</h3>
+<h5 class='text-center text-white mt-3' >Add new comment:</h5>
 <% else %>
-<h3>Edit this comment:</h3>
+<h5 class='text-center text-white mt-3'>Edit this comment:</h5>
 <% end %>
 
 <%= form_for @new_comment, html: {class:"mb-4"} do |f| %>
@@ -10,7 +10,7 @@
 <li><%= message %></li>
 <% end %>
 <% end %>
-<%= f.text_area :content,class:"form-control", rows:"2" %>
+<%= f.text_area :content,class:"textarea" %>
 <%= f.hidden_field :post_id, value:@post.id%>
-<%= f.submit "Submit",class:"btn btn-primary btn-block mt-2" %>
+<%= f.submit "Submit",class:"btn btn-sm bg-teal btn-block mt-2" %>
 <%end%>
