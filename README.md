@@ -4,7 +4,7 @@ You can check for live demo [Here](https://fast-wave-25233.herokuapp.com/).
 
 # About the program
 
-This project is a facebook-like web application, where a user can share content, build relationships with other users, and express his points of view.
+This project is a facebook clone web application, where a user can share content, build relationships with other users, and express his points of view.
 
 # Installation
 
